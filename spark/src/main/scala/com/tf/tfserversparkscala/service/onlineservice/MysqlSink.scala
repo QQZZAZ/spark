@@ -22,13 +22,13 @@ abstract class MysqlSink(url: String,
   override def open(partitionId: Long, version: Long): Boolean = {
     //通过连接池创建mysql连接
     if (StringUtils.isBlank(url) && StringUtils.isBlank(user) & StringUtils.isBlank(password)) {
-      conn = MDBManager.GetMDBManagerInstance().getConnection
+      conn = MDBManager.GetMDBManagerInstance.getConnection
     } else {
       require(StringUtils.isNotBlank(url))
       require(StringUtils.isNotBlank(user))
       require(StringUtils.isNotBlank(password))
 
-      conn = MDBManager.GetDynamicMDBManagerInstance(url, user, password).getConnection
+      conn = MDBManager.GetMDBManagerInstance(url, user, password).getConnection
     }
     true
   }
