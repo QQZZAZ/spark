@@ -1,5 +1,7 @@
 package com.tf.tfserversparkscala.common.datasources.mysql
 
+import java.util.concurrent.{Executors, LinkedBlockingDeque, ThreadPoolExecutor, TimeUnit}
+
 import com.mchange.v2.c3p0.ComboPooledDataSource
 import com.tf.tfserversparkscala.config.EnumUtil
 import org.apache.commons.lang.StringUtils
@@ -107,7 +109,7 @@ object MDBManager {
 }
 
 
-/*class ThreadExample extends Runnable {
+class ThreadExample extends Runnable {
   override def run() {
     val m = MDBManager.GetMDBManagerInstance(EnumUtil.MYSQL_URL, EnumUtil.MYSQL_USERNAME, EnumUtil.MYSQL_PASSWORD)
     val c = m.getConnection
@@ -120,10 +122,20 @@ object MDBManager {
 
 object MysqlPool {
   def main(args: Array[String]): Unit = {
-    for (i <- 0 to 1000) {
+    val exc = new ThreadPoolExecutor(2,
+      50,
+      1L,
+      TimeUnit.SECONDS,
+      new LinkedBlockingDeque[Runnable](50),
+      Executors.privilegedThreadFactory(),
+      new ThreadPoolExecutor.DiscardOldestPolicy
+    )
+    for (i <- 0 to 100000) {
       val i = new ThreadExample
       val t2 = new Thread(i)
-      t2.start()
+      exc.execute(t2)
     }
+
+    exc.shutdown()
   }
-}*/
+}
