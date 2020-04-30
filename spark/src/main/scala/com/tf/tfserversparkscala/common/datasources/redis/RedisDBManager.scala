@@ -14,7 +14,7 @@ import scala.collection.mutable
   * @param jedisAddress
   * @param port
   */
-class RedisDBManager(jedisAddress: String, port: Int) {
+class RedisDBManager(jedisAddress: String, port: Int) extends Serializable {
   //连接配置
   val config = new JedisPoolConfig
   //最大连接数

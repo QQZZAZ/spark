@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils
 /**
   * 静态获取配置文件中的数据源
   */
-class MDBManager() extends Serializable {
+class MDBManager extends Serializable {
   @volatile var url: String = _
   @volatile var user: String = _
   @volatile var password: String = _

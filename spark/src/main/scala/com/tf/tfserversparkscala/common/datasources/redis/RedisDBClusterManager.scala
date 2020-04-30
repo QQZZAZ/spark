@@ -16,7 +16,7 @@ import scala.collection.mutable
   *
   * @param jedisClusterAddress
   */
-class RedisDBClusterManager(jedisClusterAddress: String) {
+class RedisDBClusterManager(jedisClusterAddress: String) extends Serializable {
   //连接配置
   val config = new JedisPoolConfig
   //最大连接数
