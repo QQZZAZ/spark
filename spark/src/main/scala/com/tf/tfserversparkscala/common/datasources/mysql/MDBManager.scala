@@ -131,9 +131,8 @@ object MysqlPool {
       new ThreadPoolExecutor.DiscardOldestPolicy
     )
     for (i <- 0 to 100000) {
-      val i = new ThreadExample
-      val t2 = new Thread(i)
-      exc.execute(t2)
+      val t = new ThreadExample
+      exc.execute(t)
     }
 
     exc.shutdown()
