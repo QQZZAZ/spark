@@ -27,7 +27,10 @@ object ConnectMysqlUtils {
     * @return 返回 Mysql 表的 DataFrame
     */
   def readMysqlTable(sparkSession: SparkSession, table: String, filterCondition: String) = {
-    val sql = s"(select * from $table where $filterCondition ) as t1"
+    val sql =
+      s"""|select *
+          |from $table
+          |where $filterCondition  as t1""".stripMargin
     sparkSession
       .read
       .format("jdbc")
@@ -116,7 +119,11 @@ object ConnectMysqlUtils {
         dataList.foreach(f => {
           val name = f._1
           val age = f._2
-          val sql = s"replace into test_data.mysql_stu_info values($name,$age)"
+          val sql =
+            s"""
+               |replace into test_data.mysql_stu_info
+               |values($name,$age)"
+             """.stripMargin
           preparedStatement = conn.prepareStatement(sql)
           preparedStatement.addBatch()
         })
@@ -150,7 +157,12 @@ object ConnectMysqlUtils {
       dataList.foreach(f => {
         val name = f._1
         val age = f._2
-        val sql = s"update test_data.mysql_stu_info set age = $age where name=$name"
+        val sql =
+          s"""
+             |update test_data.mysql_stu_info
+             |set age = $age
+             |where name=$name
+           """.stripMargin
         preparedStatement = conn.prepareStatement(sql)
         preparedStatement.addBatch()
       })
