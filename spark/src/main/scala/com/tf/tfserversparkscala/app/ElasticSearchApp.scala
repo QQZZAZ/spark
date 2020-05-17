@@ -27,7 +27,7 @@ object ElasticSearchApp {
       .config("es.mapping.date.rich",false)
       .getOrCreate()
 
-    //指定查询条件
+    //匹配所有数据
     val query =
       s"""
          | {
@@ -37,7 +37,17 @@ object ElasticSearchApp {
          | }
          """.stripMargin
 
-    val esDf = esSession.esDF("/test/article", query)
+    //根据分词索引查询
+    val query2 =
+      s"""
+         | {
+         |  "query":{
+         |    "term":{"content":"国家"}
+         |   }
+         | }
+         """.stripMargin
+
+    val esDf = esSession.esDF("/test/article", query2)
     //todo
 
    /* val list = List(
