@@ -32,7 +32,7 @@
     <scala.version>2.11.8</scala.version>
     <spark.version>2.2.0</spark.version>
     <hadoop.version>2.7.2</hadoop.version>
-    <elasticsearch.version>6.1.1</elasticsearch.version>
+    <elasticsearch.version>6.1.0</elasticsearch.version>
   </properties>
 
   <dependencies>
@@ -231,7 +231,7 @@
     <!--<dependency>
       <groupId>org.elasticsearch</groupId>
       <artifactId>elasticsearch-hadoop</artifactId>
-      <version>6.4.0</version>
+      <version>6.1.0</version>
     </dependency>-->
 
     <dependency>
@@ -249,7 +249,7 @@
     <dependency>
       <groupId>org.elasticsearch</groupId>
       <artifactId>elasticsearch-spark-20_2.11</artifactId>
-      <version>6.3.1</version>
+      <version>6.1.0</version>
     </dependency>
 
     <dependency>

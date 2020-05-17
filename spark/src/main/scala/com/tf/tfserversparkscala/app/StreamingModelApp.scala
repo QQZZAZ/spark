@@ -30,10 +30,10 @@ object StreamingModelApp {
 
 
     //启动流
-    TFSparkSesssion.sinkSession(events,
+    /*TFSparkSesssion.sinkSession(events,
       "append",
       EnumUtil.HDFSCHECKPOINT,
       "",
-      new HbaseSink(""))
+      new HbaseSink())*/
   }
 }
