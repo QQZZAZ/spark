@@ -35,10 +35,10 @@ class RedisDBManager(jedisAddress: String, port: Int) extends Serializable {
 }
 
 object RedisDBManager {
-  private var redisdbmanager: RedisDBManager = _
+  @volatile private var redisdbmanager: RedisDBManager = _
 
   //动态获取jedis连接池，不传参则默认创建配置文件中的连接地址
-  def getMDBManager(jedisAddress: String, port: Int): RedisDBManager = {
+  def getMDBManager(jedisAddress: String = "", port: Int = 0): RedisDBManager = {
     if (redisdbmanager == null) {
       this.synchronized {
         if (redisdbmanager == null) {

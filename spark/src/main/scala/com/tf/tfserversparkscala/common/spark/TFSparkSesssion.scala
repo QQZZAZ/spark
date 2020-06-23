@@ -11,6 +11,8 @@ object TFSparkSesssion {
     val spark = SparkSession
       .builder
       .appName("StructuredSessionization")
+      .config("spark.speculation",true)
+      .config("spark.serializer","org.apache.spark.serializer.KryoSerializer")
       .master("local[*]")
       .getOrCreate()
     spark
@@ -20,6 +22,8 @@ object TFSparkSesssion {
     val spark = SparkSession
       .builder
       .appName(appName)
+      .config("spark.speculation",true)
+      .config("spark.serializer","org.apache.spark.serializer.KryoSerializer")
       .getOrCreate()
     spark
   }

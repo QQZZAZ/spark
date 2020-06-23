@@ -36,7 +36,10 @@ class RedisDBClusterManager(jedisClusterAddress: String) extends Serializable {
     paramter
   }
 
-  //设置连接池属性分别有： 配置  主机名，端口号，连接超时时间，Redis密码
+  /**
+    * 判断如果用户没传地址则配置成文件地址，如果用户传入新的地址，则配置新的地址
+    * 设置连接池属性分别有： 配置  主机名，端口号，连接超时时间，Redis密码
+    */
   val pool = jedisClusterAddress match {
     case "" => new JedisPool(config, EnumUtil.REDISURL, EnumUtil.REDISPORT, 10000, "")
     case _ => {
@@ -63,7 +66,7 @@ class RedisDBClusterManager(jedisClusterAddress: String) extends Serializable {
 
 //单例对象
 object RedisDBClusterManager {
-  private var redisdbmanager: RedisDBClusterManager = _
+  @volatile private  var redisdbmanager: RedisDBClusterManager = _
 
   //动态获取jedis连接池，不传参则默认创建配置文件中的连接地址
   def getMDBManager(jedisClusterAddress: String): RedisDBClusterManager = {

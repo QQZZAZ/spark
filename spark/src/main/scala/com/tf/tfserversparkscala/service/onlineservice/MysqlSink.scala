@@ -14,9 +14,9 @@ import org.apache.spark.sql.{ForeachWriter, Row}
   *
   * 如果想要手动指定参数，需要自己实现open，process和close方法
   */
-abstract class MysqlSink(url: String,
-                         user: String,
-                         password: String) extends ForeachWriter[Row]() {
+abstract class MysqlSink(url: String = "",
+                         user: String = "",
+                         password: String = "") extends ForeachWriter[Row]() {
   var conn: Connection = _
 
   override def open(partitionId: Long, version: Long): Boolean = {
